@@ -6,11 +6,15 @@
   * Are ye a lubber who likes it bitter?
   * Would ye like a bit of sweetness with yer poison?
   * Are ye one for a fruity finish? 
+* UI will ask the user to provide an input for each of the questions
 * Use user answers to identify ingredients
-* UI which will ask the user to provide an input for each of the questions. 
+
+
+# Instructions
+
+* Create question, ingredient, and pantry constructors
 * When the user submits their choices, store results in a preferences object
-* Create a constructor for a bartender object, and give the bartender a createDrink method. This method should take the preferences object, and construct a new drink object by fetching randomly chosen ingredients from the pantry which match the user's preferences. 
-* Create a bartender object, and add in logic so that when the user submits their preferences, the drink is created and displayed in your UI.
+* bartender object should have createDrink method. This method should take the preferences object, and construct a new drink object by fetching randomly chosen ingredients from the pantry which match the user's preferences. Displayed drink in your UI.
 
 
 # Possible ingredients:
@@ -21,5 +25,7 @@
 * Sweet ingredients: Sugar cube, spoonful of honey, splash of cola
 * Fruity ingredients: Slice of orange, dash of cassis, cherry on top
 
+
 # Instructions
+
 Create constructor functions for questions, ingredients, and the pantry (which will contain all of the available ingredients). Then use these constructors to create objects representing the bartenders questions, ingredients and pantry.

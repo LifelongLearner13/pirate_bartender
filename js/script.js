@@ -29,7 +29,7 @@ $(document).ready(function() {
         if (userPreferences[pref] === true) {
             var temp = masterIngredients[pref].randomIngredient();
             pantry.adjustPantry(temp);
-            tempContent.push(temp); 
+            tempContent.push(temp);
         }
       }
       drink.content = tempContent.join(', ');
@@ -73,6 +73,7 @@ $(document).ready(function() {
   var bitterQuestion = new Question('Are ye a lubber who likes it bitter?', 'bitter');
   var sweetQuestion = new Question('Would ye like a bit of sweetness with yer poison?', 'sweet');
   var fruityQuestion = new Question('Are ye one for a fruity finish?', 'fruity');
+
   var questionArray = [strongQuestion, saltyQuestion, bitterQuestion, sweetQuestion,fruityQuestion];
 
   /* --- Set up ingredients --- */
@@ -96,8 +97,10 @@ $(document).ready(function() {
 
   /* --- Functions --- */
   function printQuestions() {
-    
-
+    for (var i = 0; i < questionArray.length; i++) {
+      $('form').prepend(
+        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + +'"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category  + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="'+ questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
+    };
   }
 
   printQuestions();

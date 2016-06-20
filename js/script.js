@@ -18,7 +18,7 @@ $(document).ready(function() {
     };
   };
 
-  /*  */
+  /*  Bartender creates drink */
   var Bartender = function() {
     this.createDrink = function(userPreferences) {
       var drink = {
@@ -36,6 +36,7 @@ $(document).ready(function() {
     };
   };
 
+  /*  */
   var pantry = {
     'glug of rum': 10,
     'slug of whisky': 10,

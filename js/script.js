@@ -24,15 +24,16 @@ $(document).ready(function() {
       var drink = {
         content: ''
       };
+      var tempContent = [];
       for (var pref in userPreferences) {
         if (userPreferences[pref] === true) {
             var temp = masterIngredients[pref].randomIngredient();
-            console.log(temp);
             pantry.adjustPantry(temp);
-            console.log(pantry);
-          //{strong: strongIngredients, sweet: sweetIngredients}
+            tempContent.push(temp); 
         }
       }
+      drink.content = tempContent.join(', ');
+      return drink;
     };
   };
 
@@ -64,7 +65,7 @@ $(document).ready(function() {
     bitter: true,
     sweet: false,
     fruity: true
-  }
+  };
 
   /* --- Set up question objects --- */
   var strongQuestion = new Question('Do ye like yer drinks strong?', 'strong');
@@ -72,6 +73,7 @@ $(document).ready(function() {
   var bitterQuestion = new Question('Are ye a lubber who likes it bitter?', 'bitter');
   var sweetQuestion = new Question('Would ye like a bit of sweetness with yer poison?', 'sweet');
   var fruityQuestion = new Question('Are ye one for a fruity finish?', 'fruity');
+  var questionArray = [strongQuestion, saltyQuestion, bitterQuestion, sweetQuestion,fruityQuestion];
 
   /* --- Set up ingredients --- */
   var strongIngredients = new Ingredient(['glug of rum', 'slug of whisky', 'splash of gin']);
@@ -86,22 +88,19 @@ $(document).ready(function() {
     bitter: bitterIngredients,
     sweet: sweetIngredients,
     fruity: fruityIngredients
-  }
+  };
 
   /* --- Set up Bartender --- */
   var rob = new Bartender();
   rob.createDrink(prefs);
-  console.log('sweet: ' + sweetIngredients.ingredientsArray);
-  console.log('salty: ' + saltyIngredients.ingredientsArray);
-  var counts = {};
-  for (var i = 0; i < 10000; ++i) {
-    var ing = sweetIngredients.randomIngredient();
-    if (!(ing in counts)) counts[ing] = 0;
-    counts[ing]++;
-  }
-  console.log(counts);
 
-  //printQuestions();
+  /* --- Functions --- */
+  function printQuestions() {
+    
+
+  }
+
+  printQuestions();
 
   //User submits form
   //retrieveUserAns();

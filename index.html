@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Pirate Bartender</title>
 </head>
+
 <body>
-
-
-  <script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+  <form>
+    <fieldset class="question">
+      <p>Do ye like yer drinks strong?</p>
+      <label for="strong-pref">
+        <input type="radio" name="strong" id="strong" value="true">yes
+      </label>
+      <label for="strong-pref">
+        <input type="radio" name="strong-prep" id="strong-pref" value="false">no
+      </label>
+    </fieldset>
+    <button type="submit">I am thirsty!!</button>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
   <script src="js/script.js"></script>
 </body>
+
 </html>

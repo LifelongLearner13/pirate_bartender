@@ -21,10 +21,18 @@ $(document).ready(function() {
   /*  */
   var Bartender = function() {
     this.createDrink = function(userPreferences) {
-
-    };
-    this.adjustPantry = function() {
-
+      var drink = {
+        content: ''
+      };
+      for (var pref in userPreferences) {
+        if (userPreferences[pref] === true) {
+            var temp = masterIngredients[pref].randomIngredient();
+            console.log(temp);
+            pantry.adjustPantry(temp);
+            console.log(pantry);
+          //{strong: strongIngredients, sweet: sweetIngredients}
+        }
+      }
     };
   };
 
@@ -43,8 +51,19 @@ $(document).ready(function() {
     'splash of cola': 10,
     'slice of orange': 10,
     'dash of cassis': 10,
-    'cherry on top': 10
+    'cherry on top': 10,
+    adjustPantry: function(item) {
+      this[item] = this[item] - 1;
+    }
   };
+
+  var prefs = {
+    strong: true,
+    salty: false,
+    bitter: true,
+    sweet: false,
+    fruity: true
+  }
 
   /* --- Set up question objects --- */
   var strongQuestion = new Question('Do ye like yer drinks strong?', 'strong');
@@ -60,16 +79,24 @@ $(document).ready(function() {
   var sweetIngredients = new Ingredient(['sugar cube', 'spoonful of honey', 'splash of cola']);
   var fruityIngredients = new Ingredient(['slice of orange', 'dash of cassis', 'cherry on top']);
 
+  var masterIngredients = {
+    strong: strongIngredients,
+    salty: saltyIngredients,
+    bitter: bitterIngredients,
+    sweet: sweetIngredients,
+    fruity: fruityIngredients
+  }
+
   /* --- Set up Bartender --- */
   var rob = new Bartender();
-
+  rob.createDrink(prefs);
   console.log('sweet: ' + sweetIngredients.ingredientsArray);
   console.log('salty: ' + saltyIngredients.ingredientsArray);
   var counts = {};
   for (var i = 0; i < 10000; ++i) {
     var ing = sweetIngredients.randomIngredient();
     if (!(ing in counts)) counts[ing] = 0;
-    counts[ing]++; 
+    counts[ing]++;
   }
   console.log(counts);
 

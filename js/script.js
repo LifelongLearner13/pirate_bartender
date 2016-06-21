@@ -26,10 +26,11 @@ $(document).ready(function() {
       };
       var tempContent = [];
       for (var pref in userPreferences) {
-        if (userPreferences[pref] === true) {
-            var temp = masterIngredients[pref].randomIngredient();
-            pantry.adjustPantry(temp);
-            tempContent.push(temp);
+        if (userPreferences[pref] === 'true') {
+          console.log(userPreferences[pref] + ' is true');
+          var temp = masterIngredients[pref].randomIngredient();
+          pantry.adjustPantry(temp);
+          tempContent.push(temp);
         }
       }
       drink.content = tempContent.join(', ');
@@ -59,14 +60,6 @@ $(document).ready(function() {
     }
   };
 
-  var prefs = {
-    strong: true,
-    salty: false,
-    bitter: true,
-    sweet: false,
-    fruity: true
-  };
-
   /* --- Set up question objects --- */
   var strongQuestion = new Question('Do ye like yer drinks strong?', 'strong');
   var saltyQuestion = new Question('Do ye like it with a salty tang?', 'salty');
@@ -74,7 +67,7 @@ $(document).ready(function() {
   var sweetQuestion = new Question('Would ye like a bit of sweetness with yer poison?', 'sweet');
   var fruityQuestion = new Question('Are ye one for a fruity finish?', 'fruity');
 
-  var questionArray = [strongQuestion, saltyQuestion, bitterQuestion, sweetQuestion,fruityQuestion];
+  var questionArray = [strongQuestion, saltyQuestion, bitterQuestion, sweetQuestion, fruityQuestion];
 
   /* --- Set up ingredients --- */
   var strongIngredients = new Ingredient(['glug of rum', 'slug of whisky', 'splash of gin']);
@@ -93,27 +86,37 @@ $(document).ready(function() {
 
   /* --- Set up Bartender --- */
   var rob = new Bartender();
-  rob.createDrink(prefs);
+  
 
   /* --- Functions --- */
   function printQuestions() {
     for (var i = 0; i < questionArray.length; i++) {
       $('#place-order').prepend(
-        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + questionArray[i].category +'"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category  + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="'+ questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
+        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + questionArray[i].category + '"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
     }
   }
 
   function retrieveUserAns() {
-    $('#place-order').children('fieldset').each(function() {
-      console.log(this);
+    var userPref = {};
+    $('input:radio:checked').each(function() {
+      console.log($(this).attr('name') + ' = ' + $(this).val());
+      userPref[$(this).attr('name')] = $(this).val();
     });
+    console.log('userPref.sweet: ' + userPref.sweet);
+    console.log('userPref.strong: ' + userPref.strong);
+    var userDrink = rob.createDrink(userPref);
+    $('#recieve-order').append('<p>Take a drink, me hearty! Aye, drink up!</p>');
+    $('#recieve-order').append(userDrink.content);
   }
 
   printQuestions();
 
   $('#place-order').submit(function(event) {
     event.preventDefault();
-    retrieveUserAns();
+    var pref = retrieveUserAns();
+    // var userDrink = rob.createDrink(pref);
+    // $('#recieve-order').append('<p>Take a drink, me hearty! Aye, drink up!</p>');
+    // $('#recieve-order').append(userDrink.content);
   });
 
   //User submits form

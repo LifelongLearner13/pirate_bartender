@@ -59,13 +59,13 @@ $(document).ready(function() {
     }
   };
 
-  var prefs = {
-    strong: true,
-    salty: false,
-    bitter: true,
-    sweet: false,
-    fruity: true
-  };
+  // var prefs = {
+  //   strong: true,
+  //   salty: false,
+  //   bitter: true,
+  //   sweet: false,
+  //   fruity: true
+  // };
 
   /* --- Set up question objects --- */
   var strongQuestion = new Question('Do ye like yer drinks strong?', 'strong');
@@ -93,29 +93,42 @@ $(document).ready(function() {
 
   /* --- Set up Bartender --- */
   var rob = new Bartender();
-  rob.createDrink(prefs);
+
+  //console.log(drink.content);
 
   /* --- Functions --- */
   function printQuestions() {
     for (var i = 0; i < questionArray.length; i++) {
       $('form').prepend(
-        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + +'"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category  + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="'+ questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
-    };
+        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + questionArray[i].category +'"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category  + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="'+ questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
+    }
+  }
+
+  function printDrink(drink) {
+    alert('Your drink includes ' + drink.content + '.' + ' Woot!');
   }
 
   printQuestions();
 
-  //User submits form
-  //retrieveUserAns();
-  //construct preference from input as global variables
 
-  //constructDrink();
+  $('form').submit(function(event) {
+    event.preventDefault();
+    var prefs = {
+      strong: $('#strong').val() === 'true',
+      salty: $('#salty').val() === 'true',
+      bitter: $('#bitter').val() === 'true',
+      sweet: $('#sweet').val() === 'true',
+      fruity: $('#fruity').val() === 'true'
+    };
+    console.log(prefs);
+    var drink = rob.createDrink(prefs);
+    printDrink(drink);
+    console.log(drink);
+}
 
-  //bartender.createDrink(pref);
-  //ingredients.random
-
-  //adjustPantry();
-
-  //printDrink();
-
+);
 });
+
+
+
+

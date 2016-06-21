@@ -110,7 +110,6 @@ $(document).ready(function() {
 
   printQuestions();
 
-
   $('form').submit(function(event) {
     event.preventDefault();
     var prefs = {

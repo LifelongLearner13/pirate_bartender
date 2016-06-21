@@ -114,11 +114,11 @@ $(document).ready(function() {
   $('form').submit(function(event) {
     event.preventDefault();
     var prefs = {
-      strong: $('#strong').val() === 'true',
-      salty: $('#salty').val() === 'true',
-      bitter: $('#bitter').val() === 'true',
-      sweet: $('#sweet').val() === 'true',
-      fruity: $('#fruity').val() === 'true'
+      strong: $('#strong:checked').val() === 'true',
+      salty: $('#salty:checked').val() === 'true',
+      bitter: $('#bitter:checked').val() === 'true',
+      sweet: $('#sweet:checked').val() === 'true',
+      fruity: $('#fruity:checked').val() === 'true'
     };
     console.log(prefs);
     var drink = rob.createDrink(prefs);

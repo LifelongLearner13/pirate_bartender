@@ -18,44 +18,29 @@ $(document).ready(function() {
     };
   };
 
+  var PubEmployee = function() {};
+
+  PubEmployee.prototype.createOrder = function(userPreferences) {
+    var order = {
+      content: ''
+    };
+    var orderArray = [];
+    for (var pref in userPreferences) {
+      if (userPreferences[pref] === true) {
+        var tempOrder = masterIngredients[pref].randomIngredient();
+        pantry.adjustPantry(temp);
+        orderArray.push(temp);
+      }
+    }
+    order.content = orderArray.join(', ');
+    return order;
+  };
 
 
   /*  Bartender creates drink */
-  var Bartender = function() {
-    this.createDrink = function(userPreferences) {
-      var drink = {
-        content: ''
-      };
-      var tempContent = [];
-      for (var pref in userPreferences) {
-        if (userPreferences[pref] === true) {
-            var temp = masterIngredients[pref].randomIngredient();
-            pantry.adjustPantry(temp);
-            tempContent.push(temp);
-        }
-      }
-      drink.content = tempContent.join(', ');
-      return drink;
-    };
-  };
+  var Bartender = function() { };
 
-  var BurgerChef = function() {
-    this.createBurger = function(burgerPreferences) {
-      var burger = {
-        content: ''
-      };
-      var tempBurgerContent = [];
-      for (var pref in burgerPreferences) {
-        if (burgerPreferences[pref] === true) {
-            var temp = masterBurgerIngredients[pref].randomIngredient();
-            pantry.adjustPantry(temp);
-            tempBurgerContent.push(temp);
-        }
-      }
-      burger.content = tempBurgerContent.join(', ');
-      return burger;
-    };
-  };
+  var BurgerChef = function() { };
 
   /*  */
   var pantry = {
@@ -94,7 +79,7 @@ $(document).ready(function() {
   var sweetQuestion = new Question('Would ye like a bit of sweetness with yer poison?', 'sweet');
   var fruityQuestion = new Question('Are ye one for a fruity finish?', 'fruity');
 
-  var questionArray = [strongQuestion, saltyQuestion, bitterQuestion, sweetQuestion,fruityQuestion];
+  var questionArray = [strongQuestion, saltyQuestion, bitterQuestion, sweetQuestion, fruityQuestion];
 
   /* --- Set up ingredients --- */
   var strongIngredients = new Ingredient(['glug of rum', 'slug of whisky', 'splash of gin']);
@@ -120,7 +105,7 @@ $(document).ready(function() {
   function printQuestions() {
     for (var i = 0; i < questionArray.length; i++) {
       $('form').prepend(
-        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + questionArray[i].category +'"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category  + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="'+ questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
+        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + questionArray[i].category + '"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
     }
   }
 
@@ -131,23 +116,19 @@ $(document).ready(function() {
   printQuestions();
 
   $('form').submit(function(event) {
-    event.preventDefault();
-    var prefs = {
-      strong: $('#strong:checked').val() === 'true',
-      salty: $('#salty:checked').val() === 'true',
-      bitter: $('#bitter:checked').val() === 'true',
-      sweet: $('#sweet:checked').val() === 'true',
-      fruity: $('#fruity:checked').val() === 'true'
-    };
-    console.log(prefs);
-    var drink = rob.createDrink(prefs);
-    printDrink(drink);
-    console.log(drink);
-}
+      event.preventDefault();
+      var prefs = {
+        strong: $('#strong:checked').val() === 'true',
+        salty: $('#salty:checked').val() === 'true',
+        bitter: $('#bitter:checked').val() === 'true',
+        sweet: $('#sweet:checked').val() === 'true',
+        fruity: $('#fruity:checked').val() === 'true'
+      };
+      console.log(prefs);
+      var drink = rob.createDrink(prefs);
+      printDrink(drink);
+      console.log(drink);
+    }
 
-);
+  );
 });
-
-
-
-

@@ -18,6 +18,8 @@ $(document).ready(function() {
     };
   };
 
+
+
   /*  Bartender creates drink */
   var Bartender = function() {
     this.createDrink = function(userPreferences) {
@@ -34,6 +36,24 @@ $(document).ready(function() {
       }
       drink.content = tempContent.join(', ');
       return drink;
+    };
+  };
+
+  var BurgerChef = function() {
+    this.createBurger = function(burgerPreferences) {
+      var burger = {
+        content: ''
+      };
+      var tempBurgerContent = [];
+      for (var pref in burgerPreferences) {
+        if (burgerPreferences[pref] === true) {
+            var temp = masterBurgerIngredients[pref].randomIngredient();
+            pantry.adjustPantry(temp);
+            tempBurgerContent.push(temp);
+        }
+      }
+      burger.content = tempBurgerContent.join(', ');
+      return burger;
     };
   };
 

@@ -27,8 +27,7 @@ $(document).ready(function() {
       var tempContent = [];
       for (var pref in userPreferences) {
         if (userPreferences[pref] === 'true') {
-          console.log(userPreferences[pref] + ' is true');
-          var temp = masterIngredients[pref].randomIngredient();
+          var temp = ingredientMap[pref].randomIngredient();
           pantry.adjustPantry(temp);
           tempContent.push(temp);
         }
@@ -38,7 +37,7 @@ $(document).ready(function() {
     };
   };
 
-  /*  */
+  /* Pantry object, stores how many of each ingredient is avaliable. */
   var pantry = {
     'glug of rum': 10,
     'slug of whisky': 10,
@@ -76,7 +75,7 @@ $(document).ready(function() {
   var sweetIngredients = new Ingredient(['sugar cube', 'spoonful of honey', 'splash of cola']);
   var fruityIngredients = new Ingredient(['slice of orange', 'dash of cassis', 'cherry on top']);
 
-  var masterIngredients = {
+  var ingredientMap = {
     strong: strongIngredients,
     salty: saltyIngredients,
     bitter: bitterIngredients,
@@ -102,34 +101,18 @@ $(document).ready(function() {
       console.log($(this).attr('name') + ' = ' + $(this).val());
       userPref[$(this).attr('name')] = $(this).val();
     });
-    console.log('userPref.sweet: ' + userPref.sweet);
-    console.log('userPref.strong: ' + userPref.strong);
     var userDrink = rob.createDrink(userPref);
     $('#recieve-order').append('<p>Take a drink, me hearty! Aye, drink up!</p>');
     $('#recieve-order').append(userDrink.content);
   }
 
+  /* --- Main --- */
   printQuestions();
 
   $('#place-order').submit(function(event) {
     event.preventDefault();
     var pref = retrieveUserAns();
-    // var userDrink = rob.createDrink(pref);
-    // $('#recieve-order').append('<p>Take a drink, me hearty! Aye, drink up!</p>');
-    // $('#recieve-order').append(userDrink.content);
   });
 
-  //User submits form
-  //retrieveUserAns();
-  //construct preference from input as global variables
-
-  //constructDrink();
-
-  //bartender.createDrink(pref);
-  //ingredients.random
-
-  //adjustPantry();
-
-  //printDrink();
 
 });

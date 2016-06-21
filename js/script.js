@@ -98,12 +98,23 @@ $(document).ready(function() {
   /* --- Functions --- */
   function printQuestions() {
     for (var i = 0; i < questionArray.length; i++) {
-      $('form').prepend(
-        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + +'"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category  + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="'+ questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
-    };
+      $('#place-order').prepend(
+        '<fieldset class="question"><p>' + questionArray[i].question + '</p><label for="' + questionArray[i].category +'"><input type="radio" name="' + questionArray[i].category + '" id="' + questionArray[i].category  + '" value="true">yes</label><label for="strong-pref"><input type="radio" name="'+ questionArray[i].category + '" id="' + questionArray[i].category + '" value="false">no</label></fieldset>');
+    }
+  }
+
+  function retrieveUserAns() {
+    $('#place-order').children('fieldset').each(function() {
+      console.log(this);
+    });
   }
 
   printQuestions();
+
+  $('#place-order').submit(function(event) {
+    event.preventDefault();
+    retrieveUserAns();
+  });
 
   //User submits form
   //retrieveUserAns();
